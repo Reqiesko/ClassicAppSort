@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Lab1.Arr;
 
@@ -30,7 +26,7 @@ namespace Lab1
         private void EnterSize_Click(object sender, EventArgs e)
         {   
             arrSource.Size = Convert.ToInt32(numericUpDown1.Value);
-            arrSource.Arr = new int[arrSource.Size];
+            arrSource.Arr = new double[arrSource.Size];
             inputFromFileToolStripMenuItem.Enabled = false;
             numericUpDown1.Enabled = false;
             numericUpDown2.Enabled = true;
@@ -68,7 +64,7 @@ namespace Lab1
             }
             else
             {
-                arr.Arr = new int[arrSource.Size];
+                arr.Arr = new double[arrSource.Size];
                 arr.Size = arrSource.Size;
                 Array.Copy(arrSource.Arr, arr.Arr, arrSource.Size);
                 //Array.Sort(arr.Arr, arr.Size - arr.Size, arr.Size);
@@ -92,7 +88,7 @@ namespace Lab1
             RandomGen.Enabled = false;
             if (count < arrSource.Size)
             {
-                arrSource.Arr[count] = Convert.ToInt32(numericUpDown2.Value);
+                arrSource.Arr[count] = Convert.ToDouble(numericUpDown2.Value);
                 textBox1.Text += arrSource.Arr[count].ToString() + "  ";
                 count++;
             }
@@ -114,13 +110,6 @@ namespace Lab1
         {
             
         }
-
-        
-
-       
-
-     
-
         private void inputFromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -129,7 +118,7 @@ namespace Lab1
                 
                 try
                 {
-                    arrSource.Arr = sr.ReadToEnd().Split(' ', '\n', '\r', '\t').Select(int.Parse).ToArray();
+                    arrSource.Arr = sr.ReadToEnd().Split(' ', '\n', '\r', '\t').Select(double.Parse).ToArray();
                     textBox1.Clear();
                     arrSource.Size = arrSource.Arr.Length;
                     for (int i = 0; i < arrSource.Size; i++)
@@ -140,37 +129,17 @@ namespace Lab1
                     EnterSize.Enabled = false;
                     numericUpDown1.Enabled = false;
                     count = arrSource.Size;
-                    sr.Close();
+                    numericUpDown1.Value = arrSource.Size;
                 }
                 catch
                 {
-                    MessageBox.Show("Invalid file");
-                }
-                
-            }
-        }
-
-        private void saveResultsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                StreamWriter sr = new StreamWriter(saveFileDialog1.FileName);
-                for (int i = 0; i < arrSource.Size; i++)
-                {
-                    if (i == 0)
-                    {
-                        sr.Write(arrSource.Arr[i]);
-                    }
-                    else
-                    {
-                        sr.Write(" " + arrSource.Arr[i]);
-                    }
+                    MessageBox.Show("Invalid file");   
                 }
                 sr.Close();
             }
         }
 
-        private void saveSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -184,6 +153,26 @@ namespace Lab1
                     else
                     {
                         sr.Write(" " + arr.Arr[i]);
+                    }
+                }
+                sr.Close();
+            }
+        }
+
+        private void saveSourceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sr = new StreamWriter(saveFileDialog1.FileName);
+                for (int i = 0; i < arrSource.Size; i++)
+                {
+                    if (i == 0)
+                    {
+                        sr.Write(arrSource.Arr[i]);
+                    }
+                    else
+                    {
+                        sr.Write(" " + arrSource.Arr[i]);
                     }
                 }
                 sr.Close();

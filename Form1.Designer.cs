@@ -111,6 +111,7 @@ namespace Lab1
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.DecimalPlaces = 1;
             this.numericUpDown2.Location = new System.Drawing.Point(131, 23);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             1000000000,
@@ -277,7 +278,7 @@ namespace Lab1
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -295,7 +296,7 @@ namespace Lab1
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Лабораторная работа №1, Нерадовский Артемий 494 группа";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
